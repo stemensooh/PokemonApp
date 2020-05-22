@@ -1,0 +1,119 @@
+<div class="row" style="">
+    <div class="col-12 text-right">
+        <button routerLink="/home" class="btn btn-outline-danger">
+            <i class="fa fa-arrow-left"></i> Regresar
+        </button>
+    </div>
+    
+    <br>
+    <div class="row">
+        <div class="card col-6">
+            <div class="card-header">
+                <div class="h3">
+                    {{data.name |uppercase}}
+                </div>
+                <small class="h6" *ngFor="let item of data.species.specie.egg_groups" style="color: grey">
+                    [{{item.name}}]
+                </small>
+                <small class="h6" style="color: grey">
+                    [Color: {{ data.species.specie.color.name | uppercase}}]
+                </small>
+            </div>
+            <div class="card-body ">
+                <div class="text-center card-columns animated fadeIn">
+                    <div class="card puntero" *ngIf="data.sprites.front_default">
+                        <img [src]="data.sprites.front_default | noimagen" class="img-thumb " alt="..."
+                            style="height: 150px; width: 150px;">
+                    </div>
+                    <div class="card" *ngIf="data.sprites.back_default">
+                        <img [src]="data.sprites.back_default | noimagen" class="img-thumb " alt="..."
+                            style="height: 150px; width: 150px;">
+                    </div>
+                    <div class="card" *ngIf="data.sprites.front_shiny">
+                        <img [src]="data.sprites.front_shiny | noimagen" class="img-thumb " alt="..."
+                            style="height: 150px; width: 150px;">
+                    </div>
+                    <div class="card" *ngIf="data.sprites.back_shiny">
+                        <img [src]="data.sprites.back_shiny | noimagen" class="img-thumb " alt="..."
+                            style="height: 150px; width: 150px;">
+                    </div>
+                    <div class="card" *ngIf="data.sprites.front_female">
+                        <img [src]="data.sprites.front_female | noimagen" class="img-thumb " alt="..."
+                            style="height: 150px; width: 150px;">
+                    </div>
+                    <div class="card" *ngIf="data.sprites.back_female">
+                        <img [src]="data.sprites.back_female | noimagen" class="img-thumb " alt="..."
+                            style="height: 150px; width: 150px;">
+                    </div>
+                    <div class="card" *ngIf="data.sprites.front_shiny_female">
+                        <img [src]="data.sprites.front_shiny_female | noimagen" class="img-thumb " alt="..."
+                            style="height: 150px; width: 150px;">
+                    </div>
+                    <div class="card" *ngIf="data.sprites.back_shiny_female">
+                        <img [src]="data.sprites.back_shiny_female | noimagen" class="img-thumb " alt="..."
+                            style="height: 150px; width: 150px;">
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="card col-6">
+            <div class="card-header">
+                <div class="h3">Evoluciones</div>
+            </div>
+            <div class="card-body">
+                <div class="text-center card-columns animated fadeIn">
+                    <div (click)="CargarDetalles(item.name)" *ngFor="let item of evolution" class="card puntero" >
+                        <img [src]="item.imagen | noimagen" class="img-thumb" alt="..." style="height: 150px; width: 150px;">
+                        <div class="card-body">
+                            <h6 class="card-title">{{item.name}}</h6>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card col-6">
+            <div class="card-header">
+                
+            </div>
+            <div class="card-body">
+                <div class="h3">
+                    Movimientos
+                </div>
+                <p class="card-text">
+                    <span *ngFor="let move of data.moves" class="badge badge-pill badge-primary">
+                        {{move.move.name}}
+                    </span>
+                </p>
+                <div class="h3">
+                    Habilidades
+                </div>
+                <p class="card-text">
+                    <span *ngFor="let move of data.abilities" class="badge badge-pill badge-success">
+                        {{move.ability.name}}
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="card col-6">
+            <div class="card-header">
+                <div class="h3">Estadisticas</div>
+            </div>
+            <div class="card-body">
+                <div style="display: block">
+                    <canvas mdbChart
+                        [chartType]="chartType"
+                        [datasets]="chartDatasets"
+                        [labels]="chartLabels"
+                        [options]="chartOptions"
+                        [legend]="true"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)">
+                    </canvas>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+

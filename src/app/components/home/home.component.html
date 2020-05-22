@@ -1,1 +1,35 @@
-<p>home works!</p>
+
+<form (ngSubmit)="BuscarPokemon(f)" #f="ngForm">
+    <div class="row">
+        <div class="col-8">
+            <input name="name" [(ngModel)]="search.name" type="text" class="form-control" placeholder="Buscar Pokemon">
+        </div>
+        <div class="col-2">
+            <select name="limit"  [(ngModel)]="search.limit" class="form-control">
+                <option value="20" selected>20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="1000">1000</option>
+            </select>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-success" type="submit">Recargar</button>
+        </div>
+    </div>
+</form>
+<br>
+<div class="row">
+    <div class=" text-center card-columns animated fadeIn">
+        <div (click)="verDetalles(item.name)" *ngFor="let item of data.detaile_pokemon" class="card puntero" >
+            <img [src]="item.sprites.front_default | noimagen" class="img-thumb" alt="..." style="height: 200px; width: 200px;">
+            <div class="card-body">
+                <h5 class="card-title">{{item.name}}</h5>
+                <!-- <p  class="card-text">
+                    <span *ngFor="let move of item.moves" class="badge badge-pill badge-primary">
+                        {{move.move.name}}
+                    </span>
+                </p> -->
+            </div>
+        </div>
+    </div> 
+</div>
